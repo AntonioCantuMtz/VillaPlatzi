@@ -9,8 +9,21 @@ var vaca = {
     url: "img/vaca.png",
     cargaOK: false
 };
+var cerdo = {
+    url: "img/cerdo.png",
+    cargaOK: false
+};
+var pollo = {
+    url: "img/pollo.png",
+    cargaOK: false
+};
+var granjero = {
+    url: "img/granjero.png",
+    cargaOK: false
+};
 
-var cantidad = aleatorio(4, 10);
+
+var cantidad = aleatorio(2, 8);
 
 fondo.imagen = new Image();
 fondo.imagen.src = fondo.url;
