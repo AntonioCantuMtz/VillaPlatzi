@@ -1,5 +1,6 @@
 var vp = document.getElementById("Villa_platzi");
 var papel = vp.getContext("2d");
+document.addEventListener("keydown", controlGranjero);//esto sirve para mover al granjero cuando oprima una tecla de las flechitas del teclado
 
 var fondo = {
     url: "img/tile.png",
@@ -19,7 +20,13 @@ var pollo = {
 };
 var granjero = {
     url: "img/granjero.png",
-    cargaOK: false
+    cargaOK: false,
+};
+var teclas = {
+    LEFT: 37,
+    UP: 38,
+    RIGHT: 39,
+    DOWN: 40
 };
 
 
@@ -42,6 +49,10 @@ cerdo.imagen.addEventListener("load", cargarCerdos);
 pollo.imagen = new Image();
 pollo.imagen.src = pollo.url;
 pollo.imagen.addEventListener("load", cargarPollos);
+
+granjero.imagen = new Image();
+granjero.imagen.src = granjero.url;
+granjero.imagen.addEventListener("load", cargarGranjero);
 
 
 function cargarFondo()
@@ -68,7 +79,13 @@ function cargarPollos()
     dibujar();
 }
 
-function dibujar(evento)
+function cargarGranjero()
+{
+    granjero.cargaOK = true;
+    dibujar();
+}
+
+function dibujar()
 {
     if(fondo.cargaOK)
     {
@@ -104,6 +121,12 @@ function dibujar(evento)
             papel.drawImage(pollo.imagen, x, y);
         }
     }
+    if(granjero.cargaOK)
+    {
+        var x = 400, y = 390;
+        console.log("Granjero dibujado");
+        papel.drawImage(granjero.imagen, x, y);//Esto viene ciendo el punto inicial donde se dibuja el granjero
+    }
 }
 
 function aleatorio(min, maxi)
@@ -111,4 +134,27 @@ function aleatorio(min, maxi)
     var resultado;
     resultado = Math.floor(Math.random() * (maxi - min + 1)) + min;
     return resultado;
+}
+
+//Funcion para que cuando precione una flechita ocurra algo que en este caso es que el grnajero se mueva
+function controlGranjero(evento)
+{
+    var movimiento = 5;
+    switch(evento.keyCode)
+    {
+        case teclas.DOWN:
+            y = y + movimiento;
+        break;
+        case teclas.UP:
+            y = y - movimiento;
+        break;
+        case teclas.RIGHT:
+            x = x + movimiento;
+        break;
+        case teclas.LEFT:
+            x = x - movimiento;
+        break;
+        default:
+        break;
+    }
 }
